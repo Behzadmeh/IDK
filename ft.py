@@ -7,7 +7,10 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import os
 import datasets
 from datasets import Dataset, DatasetDict, load_dataset
+from dotenv import load_dotenv
 
+load_dotenv()
+HF_token = os.getenv("HF_TOKEN")
 # Set CUDA_VISIBLE_DEVICES to use only GPU 0
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device = torch.device("cuda:0")
@@ -28,8 +31,8 @@ def set_seed(seed: int = 42) -> None:
 set_seed(myseed)
 
 from huggingface_hub import login
-login(token='')
-hugingface_id = ''
+login(token=HF_token)
+hugingface_id = 'bmehrba'
 
 # model_id = "meta-llama/Llama-2-7b-chat-hf" 
 # "meta-llama/Llama-3.1-8B-Instruct" 
@@ -178,5 +181,5 @@ tokenizer.save_pretrained(local_model_path)
 model.save_pretrained(local_model_path)
 
 # Push the model to Hugging Face Hub
-model.push_to_hub(repo_name, token='')
-tokenizer.push_to_hub(repo_name, token='')
+model.push_to_hub(repo_name, token=HF_token)
+tokenizer.push_to_hub(repo_name, token=HF_token)

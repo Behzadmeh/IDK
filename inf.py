@@ -6,6 +6,11 @@ import random
 import os
 import time
 from datasets import load_dataset
+from dotenv import load_dotenv
+
+load_dotenv()
+HF_token = os.getenv("HF_TOKEN")
+
 
 # Set random seed for reproducibility
 def set_seed(seed: int = 42) -> None:
@@ -22,8 +27,8 @@ set_seed(2024)
 
 # Hugging Face login and configuration
 from huggingface_hub import login
-login(token='')
-huggingface_id = ''
+login(token=HF_token)
+huggingface_id = 'bmehrba'
 
 
 MODEL_ID =  f"meta-llama/Llama-3.2-3B-Instruct"
